@@ -1,40 +1,51 @@
 from sum_alg import sumAlg
 from diff_alg import diffAlg, isBigger
+from mult_alg import multAlg
 from utils_alg import *
 
 def divAlg(dividend, divisor, base):
     dividend = list(str(dividend))
-    divisor = list(str(divisor))
+    divisor = str(divisor)
     reminder = 0
     res = ""
 
     dividendLen = len(dividend)
-    divisorLen = len(divisor)
+    
+    if (isSmaller(dividend, divisor)):
+        return "q: 0 + r: " + dividend
 
-    if (not isBigger(dividendLen, divisorLen)):
-        return "q: " + dividend + " r: 0"
+    dividendStartPointer = 0
+    dividendEndPointer = 0
+    while (dividendEndPointer < dividendLen):
 
-    if (isEqual(dividendLen, divisorLen) and not isBigger(dividend, divisor)):
-            return "q: " + dividend + " r: 0"
+        # iterate over a dividend until a number bigger or equal to the divisor is found
+        if(isSmaller(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]), divisor)):
+            reminder = int(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]))
 
-    for dividendI in range(dividendLen):
-        if(not isBigger(dividendLen[:dividendI], divisor)):
-            reminder = int(dividendLen[:dividendI])
-            continue
-        else: 
-            tmpDivident = dividendLen[:dividendI + 1]
+            # if a number on the second lookup (not iteration) is too small add '0' to the result
+            if (not isEqual(dividendStartPointer, 0)):
+                res += '0'
+        else:
+            tmpDividend = int(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]))
             reminder = 0
             tmpSum = 0
-            for multiplications in range(20): # divisors can't be larger than 9, but just to be safe in this crazy world
-                if(not isBigger(tmpSum, tmpDivident)):
-                    tmpSum = sumAlg(tmpSum, divisor, base)
-                else: 
-                    res += str(multiplications - 1)
-                    reminder = diffAlg(tmpDivident, tmpSum - divisor, base)
-                    dividend[dividendI] = reminder
-                    dividendI = diffAlg(dividendI, 1, base=10)
-                    break
-   
-    return "q: " + res + "r: " + reminder
 
-print(divAlg(100, 10, 10))
+            # perform internal division
+            for multiplications in range(20): # divisors can't be larger than 9, but just to be safe in this crazy world
+                if (isSmaller(tmpSum, tmpDividend)):
+                    tmpSum = sumAlg(tmpSum, divisor, base)
+                else:
+                    if (isBigger(tmpSum, tmpDividend)): 
+                        multiplications = diffAlg(multiplications, 1, base=10)
+                    res += str(multiplications)
+                    reminder = diffAlg(tmpDividend, multAlg(multiplications, divisor, base), base)
+                    dividend[dividendEndPointer] = str(reminder)
+                    dividendStartPointer = dividendEndPointer
+                    break
+        
+        # increase pointer
+        dividendEndPointer = sumAlg(dividendEndPointer, 1, base=10)
+   
+    return "q: " + res + " r: " + str(reminder)
+
+print(divAlg(1310, 12, 10))

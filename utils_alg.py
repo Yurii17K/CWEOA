@@ -1,12 +1,36 @@
 def isBigger(num1, num2):
+    num1 = str(num1)
+    num2 = str(num2)
+    if (len(num1) > len(num2)):
+        return True
+    if (len(num1) < len(num2)):
+        return False
     for x in range(len(num1)):
             if(num1[x] > num2[x]):
                 return True
             elif (num1[x] == num2[x]):
                 continue
             else: return False
+    return False
+
+def isSmaller(num1, num2):
+    num1 = str(num1)
+    num2 = str(num2)
+    if (len(num1) < len(num2)):
+        return True
+    if (len(num1) > len(num2)):
+        return False
+    for x in range(len(num1)):
+            if(num1[x] < num2[x]):
+                return True
+            elif (num1[x] == num2[x]):
+                continue
+            else: return False
+    return False
 
 def isEqual(num1, num2):
+    num1 = str(num1)
+    num2 = str(num2)
     if(len(num1) != len(num2)):
         return False
     for x in range(len(num1)):

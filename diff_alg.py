@@ -8,7 +8,7 @@ def diffAlg(num1, num2, base):
     # carry = 0
     swapped = False
 
-    if (len(longerNum) < len(shorterNum)):
+    if (isSmaller(longerNum, shorterNum)):
         tmpSwap = longerNum
         longerNum = shorterNum
         shorterNum = tmpSwap
@@ -16,13 +16,6 @@ def diffAlg(num1, num2, base):
 
     longerNumLen = len(longerNum)
     shorterNumLen = len(shorterNum)
-
-    if (not swapped and longerNumLen == shorterNumLen):
-        if (not isBigger(longerNum, shorterNum)):
-            tmpSwap = longerNum
-            longerNum = shorterNum
-            shorterNum = tmpSwap
-            swapped = True
 
     for x in range(shorterNumLen):
         upperNum = int(longerNum[longerNumLen - 1 - x])
