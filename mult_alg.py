@@ -1,5 +1,6 @@
 from sum_alg import sumAlg
 from diff_alg import diffAlg
+from utils_alg import *
 
 def multAlg(num1, num2, base):
     longerNum = str(num1)
@@ -7,7 +8,7 @@ def multAlg(num1, num2, base):
     res = ""
     carry = 0
 
-    if (len(longerNum) < len(shorterNum)):
+    if (isSmaller(len(longerNum), len(shorterNum))):
         tmpSwap = longerNum
         longerNum = shorterNum
         shorterNum = tmpSwap
@@ -27,13 +28,13 @@ def multAlg(num1, num2, base):
             tmpMult = sumAlg(tmpMult, carry, base) # add carry
 
             baseDivisions = 0
-            if (upperRowI != longerNumLen - 1):
+            if (not isEqual(upperRowI, longerNumLen - 1)):
                 # perform 'division' by base to get the result and a carry
-                while (tmpMult >= base):
+                while (isBiggerOrEqual(tmpMult, base)):
                     tmpMult = diffAlg(tmpMult, base, base)
                     baseDivisions = sumAlg(baseDivisions, 1, base)
                 carry = baseDivisions
-            else: carry = 0 # do not divide for last (first in written form) number of the upper row
+            else: carry = 0 # do not divide for last (first in written form) number of the upper row, just 'bring' it down
 
             tmpRowMult += str(tmpMult)[::-1]
 

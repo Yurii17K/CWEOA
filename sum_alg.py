@@ -9,39 +9,75 @@ def sumAlg(num1, num2, base):
     shorterNum = list(str(num2))
     res = ""
     reminder = 0
+    minusesFoundInLongerNumber = 0
 
-    if (len(longerNum) < len(shorterNum)):
+    if (isSmaller(longerNum, shorterNum)):
         tmpSwap = longerNum
         longerNum = shorterNum
         shorterNum = tmpSwap
 
-    for x in range(len(shorterNum)):
-        if (((len(shorterNum) - 2 - x) >= 0) and shorterNum[len(shorterNum) - 2 - x] == '-'):
-            shorterNum.pop(len(shorterNum) - 2 - x)
-            shorterNum[len(shorterNum) - 1 - x] = '-' + shorterNum[len(shorterNum) - 1 - x]
-        tmpSum = sumLT(sumLT(int(longerNum[len(longerNum) - 1 - x]), int(shorterNum[len(shorterNum) - 1 - x])), reminder)
-        if (tmpSum >= base):
+    longerNumLen = len(longerNum)
+    shorterNumLen = len(shorterNum)
+
+    longerNumI = 1
+    shorterNumI = 1
+    while (isSmaller(shorterNumI, shorterNumLen + 1)):
+
+        shiftDueToUpperMinus = 0
+        shiftDueToLowerMinus = 0
+
+        # negative numbers handling in the uppper row
+        if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
+            longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
+            longerNumI += 1
+            minusesFoundInLongerNumber += 1
+            shiftDueToUpperMinus += 1
+        
+        if (isBiggerOrEqual(shorterNumLen - 1 - shorterNumI, 0) and isEqual(shorterNum[shorterNumLen - 1 - shorterNumI], '-')):
+            shorterNum[shorterNumLen - shorterNumI] = '-' + shorterNum[shorterNumLen - shorterNumI]
+            shorterNumI += 1
+            shiftDueToLowerMinus += 1
+
+        tmpSum = sumLT(sumLT(
+                            int(longerNum[longerNumLen - longerNumI - shiftDueToUpperMinus]),
+                            int(shorterNum[shorterNumLen - shorterNumI - shiftDueToLowerMinus])),
+                    reminder)
+                
+        # rounding to a base
+        if (isBiggerOrEqual(tmpSum, base)):
             reminder = 1
             res += str(diffLT(tmpSum, base))
         else: 
             reminder = 0
             res += str(tmpSum)
 
-    for x in range(len(shorterNum), len(longerNum)):
-        if (((len(longerNum) - 2 - x) >= 0) and longerNum[len(longerNum) - 2 - x] == '-'):
-            longerNum.pop(len(longerNum) - 2 - x)
-            longerNum[len(longerNum) - 1 - x] = '-' + longerNum[len(longerNum) - 1 - x]
-        tmpSum = sumLT(int(longerNum[len(longerNum) - 1 - x]), reminder)
-        if (tmpSum >= base):
+        longerNumI += 1
+        shorterNumI += 1
+
+    longerNumI = shorterNumLen + minusesFoundInLongerNumber + 1
+    while (isSmaller(longerNumI, longerNumLen + 1)):
+
+        # negative numbers handling
+        if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
+            longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
+            longerNumI += 1
+            tmpSum = sumLT(int(longerNum[longerNumLen - longerNumI - 1]), reminder)
+        else: 
+            tmpSum = sumLT(int(longerNum[longerNumLen - longerNumI]), reminder)
+
+        # rounding to a base
+        if (isBiggerOrEqual(tmpSum, base)):
             reminder = 1
             res += str(diffLT(tmpSum, base))
         else: 
             reminder = 0
             res += str(tmpSum)
 
-    if (reminder != 0):
+        longerNumI += 1
+
+    if (not isEqual(reminder, 0)):
         res += str(reminder)
 
     return int(res[::-1])
 
-# print(sumAlg(-10, -10, 10))
+print(sumAlg(-11, 1011, 2))

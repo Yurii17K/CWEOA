@@ -10,13 +10,13 @@ def divAlg(dividend, divisor, base):
     res = ""
 
     dividendLen = len(dividend)
-    
+
     if (isSmaller(dividend, divisor)):
         return "q: 0 + r: " + dividend
 
     dividendStartPointer = 0
     dividendEndPointer = 0
-    while (dividendEndPointer < dividendLen):
+    while (isSmaller(dividendEndPointer, dividendLen)):
 
         # iterate over a dividend until a number bigger or equal to the divisor is found
         if(isSmaller(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]), divisor)):
@@ -37,8 +37,9 @@ def divAlg(dividend, divisor, base):
                 else:
                     if (isBigger(tmpSum, tmpDividend)): 
                         multiplications = diffAlg(multiplications, 1, base=10)
+                        tmpSum = diffAlg(tmpSum, divisor, base)
                     res += str(multiplications)
-                    reminder = diffAlg(tmpDividend, multAlg(multiplications, divisor, base), base)
+                    reminder = diffAlg(tmpDividend, tmpSum, base)
                     dividend[dividendEndPointer] = str(reminder)
                     dividendStartPointer = dividendEndPointer
                     break
@@ -48,4 +49,4 @@ def divAlg(dividend, divisor, base):
    
     return "q: " + res + " r: " + str(reminder)
 
-print(divAlg(1310, 12, 10))
+print(divAlg(1100110001, 10101, 2))

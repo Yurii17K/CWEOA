@@ -13,20 +13,42 @@ def isBigger(num1, num2):
             else: return False
     return False
 
-def isSmaller(num1, num2):
+def isBiggerOrEqual(num1, num2):
     num1 = str(num1)
     num2 = str(num2)
-    if (len(num1) < len(num2)):
-        return True
     if (len(num1) > len(num2)):
+        return True
+    if (len(num1) < len(num2)):
         return False
     for x in range(len(num1)):
-            if(num1[x] < num2[x]):
+            if(num1[x] > num2[x]):
                 return True
             elif (num1[x] == num2[x]):
                 continue
             else: return False
-    return False
+    return True 
+
+def isSmaller(num1, num2):
+    num1 = str(num1)
+    num2 = str(num2)
+    if (num1[0] == '-' and num2[0] != '-'):
+        return True
+    elif (num1[0] != '-' and num2[0] == '-'): 
+        return False
+    elif (num1[0] == '-' and num2[0] == '-'):
+        return isBigger(num1[1:], num2[1:]) 
+    else: 
+        if (len(num1) < len(num2)):
+            return True
+        if (len(num1) > len(num2)):
+            return False
+        for x in range(len(num1)):
+                if(num1[x] < num2[x]):
+                    return True
+                elif (num1[x] == num2[x]):
+                    continue
+                else: return False
+        return False
 
 def isEqual(num1, num2):
     num1 = str(num1)
@@ -76,6 +98,7 @@ def diffLT(number1, number2):
     if (number2 == 0):
         return number1
     diffTable = {
+        -10: [-10, -11, -12, -13, -14, -15, -16, -17, -18, -19], 
         -9: [-9, -10, -11, -12, -13, -14, -15, -16, -17, -18], 
         -8: [-8, -9, -10, -11, -12, -13, -14, -15, -16, -17], 
         -7: [-7, -8, -9, -10, -11, -12, -13, -14, -15, -16], 
