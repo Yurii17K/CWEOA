@@ -41,3 +41,5 @@ def multAlg(num1, num2, base):
         res = sumAlg(res, int(tmpRowMult[::-1] + ('0' * lowerRowI)), base)
 
     return res
+
+# print(multAlg(12, 13, 10))

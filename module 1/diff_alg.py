@@ -6,6 +6,7 @@ def diffAlg(num1, num2, base):
     shorterNum = list(str(num2))
     res = ""
     swapped = False
+    lenderExists = True
 
     if (isSmaller(longerNum, shorterNum)):
         tmpSwap = longerNum
@@ -21,15 +22,27 @@ def diffAlg(num1, num2, base):
         lowerNum = int(shorterNum[shorterNumLen - 1 - x])
 
         # 'borrow' from the next column
-        if (upperNum < lowerNum):
+        if (isSmaller(upperNum, lowerNum)):
+
+            # stop if the left-most element of the upper number is smaller than the corresponding element of a lower element due to constant 'borrowwing'
+            if (isEqual(x + 1, longerNumLen)):
+                break
+
+            # 'borrow' a base
             upperNum = sumAlg(upperNum, base, base=10)
 
             # look for a column with a non-zero number
+            lenderExists = False
             for y in range(longerNumLen - x - 1):
-                longerNum[longerNumLen - 2 - y - x] = diffLT(int(longerNum[longerNumLen - 2 - y - x]), 1)
-                if (int(longerNum[longerNumLen - 2 - y - x]) > -1):
+                longerNum[longerNumLen - 2 - y - x] = diffLTNoNegatives(int(longerNum[longerNumLen - 2 - y - x]), 1)
+                currentNum = int(longerNum[longerNumLen - 2 - y - x])
+                if (not isEqual(currentNum, 9) and isBiggerOrEqual(currentNum, 0)):
+                    lenderExists = True
                     break
-                
+        
+        # imagine 100 - 99, already on a second iteration there won't be any elements to borrow from
+        if (not lenderExists): break
+
         # perform basic subtraction
         tmpDiff = diffLT(upperNum, lowerNum)
 
@@ -39,12 +52,13 @@ def diffAlg(num1, num2, base):
         res += str(tmpDiff)
 
     # just bring down the elements from the upper raw
-    for x in range(shorterNumLen, longerNumLen):
-        res += str(longerNum[longerNumLen - 1 - x])
+    if (lenderExists):
+        for x in range(shorterNumLen, longerNumLen):
+            res += str(longerNum[longerNumLen - 1 - x])
 
     # put '-' if the first number was smaller
     if (swapped):
         return int('-' + res[::-1])
     else: return int(res[::-1])
 
-# print(diffAlg(1100, 101, 2))
+print(diffAlg(-1, 72, 10))

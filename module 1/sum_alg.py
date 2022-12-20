@@ -80,4 +80,4 @@ def sumAlg(num1, num2, base):
 
     return int(res[::-1])
 
-print(sumAlg(-11, 1011, 2))
+# print(sumAlg(123, 12, 10))

@@ -1,18 +1,17 @@
 from sum_alg import sumAlg
 from diff_alg import diffAlg, isBigger
-from mult_alg import multAlg
 from utils_alg import *
 
 def divAlg(dividend, divisor, base):
+    if (isSmaller(dividend, divisor)):
+        return "q: 0 r: " + str(dividend)
+
     dividend = list(str(dividend))
     divisor = str(divisor)
     reminder = 0
     res = ""
 
     dividendLen = len(dividend)
-
-    if (isSmaller(dividend, divisor)):
-        return "q: 0 + r: " + dividend
 
     dividendStartPointer = 0
     dividendEndPointer = 0
@@ -22,7 +21,7 @@ def divAlg(dividend, divisor, base):
         if(isSmaller(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]), divisor)):
             reminder = int(''.join(dividend[dividendStartPointer:dividendEndPointer + 1]))
 
-            # if a number on the second lookup (not iteration) is too small add '0' to the result
+            # if a devisor is too small and this is not a first lookup and a 0 (obviously don't add 0s when dividing 1003 by 127 in the beginning just because 1,10,100 are smaller)
             if (not isEqual(dividendStartPointer, 0)):
                 res += '0'
         else:
@@ -49,4 +48,4 @@ def divAlg(dividend, divisor, base):
    
     return "q: " + res + " r: " + str(reminder)
 
-print(divAlg(1100110001, 10101, 2))
+print(divAlg(1, 34, 10))
