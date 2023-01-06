@@ -1,12 +1,39 @@
-from sum_alg import sumAlg
+from sum_alg import sumAlg, sumAlgB10
 from utils_alg import *
 
+def diffAlgB10(num1, num2):
+    num1 = str(num1)
+    num2 = str(num2)
+
+    if (isEqual(num1[0], '-') or isEqual(num2[0], '-')):
+        return diffNeg(num1, num2)
+    return diffAlg(num1, num2, 10)
+
+def diffNeg(num1, num2):
+    if (not isEqual(num1[0], '-') and isEqual(num2[0], '-')):
+        return sumAlgB10(num1[1:], num2[1:])
+    if (isEqual(num1[0], '-') and not isEqual(num2[0], '-')):
+        return int('-' + str(sumAlgB10(num1[1:], num2[1:])))
+
+    #  both negative
+    if(isSmaller(num1, num2)):
+        return int(str('-' + str(diffAlgB10(num1[1:], num2[1:]))))
+    elif isBigger(num1, num2):
+        return diffAlgB10(num2[1:], num1[1:])
+    else: return 0
+
 def diffAlg(num1, num2, base):
-    longerNum = list(str(num1))
-    shorterNum = list(str(num2))
+    longerNum = str(num1)
+    shorterNum = str(num2)
     res = ""
     swapped = False
     lenderExists = True
+
+    if (isEqual(longerNum[0], '-') or isEqual(shorterNum[0], '-')):
+        return diffNeg(longerNum, shorterNum)
+
+    longerNum = list(longerNum)
+    shorterNum = list(shorterNum)
 
     if (isSmaller(longerNum, shorterNum)):
         tmpSwap = longerNum
@@ -61,4 +88,4 @@ def diffAlg(num1, num2, base):
         return int('-' + res[::-1])
     else: return int(res[::-1])
 
-print(diffAlg(-1, 72, 10))
+# print(diffAlg(5, 6, 10))

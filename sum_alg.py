@@ -1,5 +1,8 @@
 from utils_alg import *
 
+def sumAlgB10(num1, num2):
+    return sumAlg(num1, num2, 10)
+
 def sumAlg(num1, num2, base):
     # base = int(input("Input future numbers' base (up to 10 inclusive): \n"))
     # longerNum = input("Input the 1st num: \n")
@@ -26,7 +29,7 @@ def sumAlg(num1, num2, base):
         shiftDueToUpperMinus = 0
         shiftDueToLowerMinus = 0
 
-        # negative numbers handling in the uppper row
+        # internal negative digits handling (doesn't work)
         if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
             longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
             longerNumI += 1
@@ -57,7 +60,7 @@ def sumAlg(num1, num2, base):
     longerNumI = shorterNumLen + minusesFoundInLongerNumber + 1
     while (isSmaller(longerNumI, longerNumLen + 1)):
 
-        # negative numbers handling
+        # internal negative digits handling (doesn't work)
         if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
             longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
             longerNumI += 1
@@ -80,4 +83,4 @@ def sumAlg(num1, num2, base):
 
     return int(res[::-1])
 
-# print(sumAlg(123, 12, 10))
+# print(sumAlg(123, 12, 1   0))

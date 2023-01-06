@@ -2,9 +2,17 @@ from sum_alg import sumAlg
 from diff_alg import diffAlg, isBigger
 from utils_alg import *
 
+def divAlgB10(dividend, divisor):
+    # no idea how and why but for insanely large numbers it happened once, so here's an error
+    if isEqual(divisor, 0):
+        raise ValueError("CAN NOT DIVIDE BY ZERO")
+    if isEqual(str(dividend)[0], '-'):
+        return divWithNeg(str(dividend), divisor)
+    return divAlg(dividend, divisor, 10)
+
 def divAlg(dividend, divisor, base):
     if (isSmaller(dividend, divisor)):
-        return "q: 0 r: " + str(dividend)
+        return (0, int(dividend))
 
     dividend = list(str(dividend))
     divisor = str(divisor)
@@ -46,6 +54,17 @@ def divAlg(dividend, divisor, base):
         # increase pointer
         dividendEndPointer = sumAlg(dividendEndPointer, 1, base=10)
    
-    return "q: " + res + " r: " + str(reminder)
+    return (int(res), reminder)
+    
+def divWithNeg(divident, divisor):
+    multiplications = 0
+    tmpSum = 0
+    nonNegDivident = int(str(divident[1:]))
+    reminder = 0
+    while(isSmaller(tmpSum, nonNegDivident)):
+        multiplications += 1
+        tmpSum += divisor
+    
+    return (int('-' + str(multiplications)), diffAlg(tmpSum, nonNegDivident, 10))
 
-print(divAlg(1, 34, 10))
+# print(divAlg(-14, 71, 10))

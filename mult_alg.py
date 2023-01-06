@@ -2,17 +2,31 @@ from sum_alg import sumAlg
 from diff_alg import diffAlg
 from utils_alg import *
 
+def multAlgB10(num1, num2):
+    return multAlg(num1, num2, 10)
+
 def multAlg(num1, num2, base):
     longerNum = str(num1)
     shorterNum = str(num2)
     res = ""
     carry = 0
+    negative = False
 
     if (isSmaller(len(longerNum), len(shorterNum))):
         tmpSwap = longerNum
         longerNum = shorterNum
         shorterNum = tmpSwap
-    
+
+    if(isEqual(longerNum[0], '-') and isEqual(shorterNum[0], '-')):
+        longerNum = longerNum[1:]
+        shorterNum = shorterNum[1:]
+    elif(isEqual(longerNum[0], '-') and not isEqual(shorterNum[0], '-')):
+        negative = True
+        longerNum = longerNum[1:]
+    elif(not isEqual(longerNum[0], '-') and isEqual(shorterNum[0], '-')):
+        negative = True
+        shorterNum = shorterNum[1:]
+
     longerNumLen = len(longerNum)
     shorterNumLen = len(shorterNum)
 
@@ -40,6 +54,8 @@ def multAlg(num1, num2, base):
 
         res = sumAlg(res, int(tmpRowMult[::-1] + ('0' * lowerRowI)), base)
 
-    return res
+    if not negative:
+        return res
+    else: return int('-' + str(res))
 
 # print(multAlg(12, 13, 10))
