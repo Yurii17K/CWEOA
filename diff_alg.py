@@ -11,16 +11,15 @@ def diffAlgB10(num1, num2):
 
 def diffNeg(num1, num2):
     if (not isEqual(num1[0], '-') and isEqual(num2[0], '-')):
-        return sumAlgB10(num1[1:], num2[1:])
+        return sumAlgB10(num1, num2[1:])
     if (isEqual(num1[0], '-') and not isEqual(num2[0], '-')):
-        return int('-' + str(sumAlgB10(num1[1:], num2[1:])))
+        return int('-' + str(sumAlgB10(num1[1:], num2)))
 
     #  both negative
     if(isSmaller(num1, num2)):
         return int(str('-' + str(diffAlgB10(num1[1:], num2[1:]))))
-    elif isBigger(num1, num2):
+    else:
         return diffAlgB10(num2[1:], num1[1:])
-    else: return 0
 
 def diffAlg(num1, num2, base):
     longerNum = str(num1)
@@ -88,4 +87,6 @@ def diffAlg(num1, num2, base):
         return int('-' + res[::-1])
     else: return int(res[::-1])
 
-# print(diffAlg(5, 6, 10))
+
+# TESTS
+print(diffNeg("-5", "-4"))

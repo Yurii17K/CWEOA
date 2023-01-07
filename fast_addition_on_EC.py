@@ -53,4 +53,4 @@ def add_points(p: int, A: int, P1, P2):
 
 # TESTS
 print(fast_addition(33, 47, 71, (37, 37), 2))
-print(fast_addition(33, 45, 71, (8, 53), 1))
+# print(fast_addition(33, 45, 71, (8, 53), 1))
