@@ -10,9 +10,12 @@ def diffAlgB10(num1, num2):
     return diffAlg(num1, num2, 10)
 
 def diffNeg(num1, num2):
-    if (not isEqual(num1[0], '-') and isEqual(num2[0], '-')):
+    num1IsNegative = isEqual(num1[0], '-')
+    num2IsNegative = isEqual(num2[0], '-')
+
+    if (not num1IsNegative and num2IsNegative):
         return sumAlgB10(num1, num2[1:])
-    if (isEqual(num1[0], '-') and not isEqual(num2[0], '-')):
+    if (num1IsNegative and not num2IsNegative):
         return int('-' + str(sumAlgB10(num1[1:], num2)))
 
     #  both negative
@@ -89,4 +92,4 @@ def diffAlg(num1, num2, base):
 
 
 # TESTS
-print(diffNeg("-5", "-4"))
+# print(diffAlgB10("-40", "6"))

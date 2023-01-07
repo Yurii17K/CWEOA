@@ -31,5 +31,5 @@ def ext_eucl(y, p):
 
 
 # TESTS
-print(find_opposite(p=643, x=81, y=565))
-print(find_opposite(p=271, x=95, y=50))
+# print(find_opposite(p=643, x=81, y=565))
+# print(find_opposite(p=271, x=95, y=50))

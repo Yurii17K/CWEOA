@@ -1,4 +1,4 @@
-from sum_alg import sumAlg
+from sum_alg import sumAlgB10, sumAlg
 from diff_alg import diffAlg, isBigger
 from utils_alg import *
 
@@ -6,8 +6,8 @@ def divAlgB10(dividend, divisor):
     # no idea how and why but for insanely large numbers it happened once, so here's an error
     if isEqual(divisor, 0):
         raise ValueError("CAN NOT DIVIDE BY ZERO")
-    if isEqual(str(dividend)[0], '-'):
-        return divWithNeg(str(dividend), divisor)
+    if isEqual(str(dividend)[0], '-') or isEqual(str(divisor)[0], '-'):
+        return divWithNeg(str(dividend), str(divisor))
     return divAlg(dividend, divisor, 10)
 
 def divAlg(dividend, divisor, base):
@@ -56,15 +56,32 @@ def divAlg(dividend, divisor, base):
    
     return (int(res), reminder)
     
-def divWithNeg(divident, divisor):
+def divWithNeg(dividend, divisor):
+    negative = True
+
+    dividentIsNegative = isEqual(dividend[0], '-')
+    divisorIsNegative =  isEqual(divisor[0], '-')
+
+    if dividentIsNegative and not divisorIsNegative:
+        dividend = dividend[1:]
+    elif not dividentIsNegative and divisorIsNegative:
+        divisor = divisor[1:]
+    elif dividentIsNegative and divisorIsNegative:
+        dividend = dividend[1:]
+        divisor = divisor[1:]
+        negative = False
+
     multiplications = 0
     tmpSum = 0
-    nonNegDivident = int(str(divident[1:]))
-    reminder = 0
-    while(isSmaller(tmpSum, nonNegDivident)):
-        multiplications += 1
-        tmpSum += divisor
-    
-    return (int('-' + str(multiplications)), diffAlg(tmpSum, nonNegDivident, 10))
+    while(isSmaller(tmpSum, dividend)):
+        multiplications = sumAlgB10(multiplications, 1)
+        tmpSum = sumAlgB10(tmpSum, divisor)
+
+    quotient = str(multiplications)
+    reminder = diffAlg(tmpSum, dividend, 10)
+
+    if negative:
+        return (int('-' + quotient), reminder)
+    else: return(int(quotient), reminder)
 
 # print(divAlg(-14, 71, 10))

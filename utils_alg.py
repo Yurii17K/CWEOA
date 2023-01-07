@@ -1,12 +1,15 @@
 def isBigger(num1, num2):
     num1 = str(num1)
     num2 = str(num2)
-    if (num1[0] == '-' and num2[0] != '-'):
+    num1IsNegative = isEqual(num1[0], '-')
+    num2IsNegative = isEqual(num2[0], '-')
+
+    if (num1IsNegative and not num2IsNegative):
         return False
-    elif (num1[0] != '-' and num2[0] == '-'): 
+    elif (not num1IsNegative and num2IsNegative): 
         return True
-    elif (num1[0] == '-' and num2[0] == '-'):
-        return isBigger(num1[1:], num2[1:])
+    elif (num1IsNegative and num2IsNegative):
+        return not isBigger(num1[1:], num2[1:])
     
     if (len(num1) > len(num2)):
         return True
@@ -15,7 +18,7 @@ def isBigger(num1, num2):
     for x in range(len(num1)):
             if(num1[x] > num2[x]):
                 return True
-            elif (num1[x] == num2[x]):
+            elif (isEqual(num1[x], num2[x])):
                 continue
             else: return False
     return False
@@ -28,11 +31,14 @@ def isBiggerOrEqual(num1, num2):
 def isSmaller(num1, num2):
     num1 = str(num1)
     num2 = str(num2)
-    if (num1[0] == '-' and num2[0] != '-'):
+    num1IsNegative = isEqual(num1[0], '-')
+    num2IsNegative = isEqual(num2[0], '-')
+    
+    if (num1IsNegative and not num2IsNegative):
         return True
-    elif (num1[0] != '-' and num2[0] == '-'): 
+    elif (not num1IsNegative and num2IsNegative): 
         return False
-    elif (num1[0] == '-' and num2[0] == '-'):
+    elif (num1IsNegative and num2IsNegative):
         return isBigger(num1[1:], num2[1:]) 
     else: 
         if (len(num1) < len(num2)):
@@ -50,10 +56,10 @@ def isSmaller(num1, num2):
 def isEqual(num1, num2):
     num1 = str(num1)
     num2 = str(num2)
-    if(len(num1) != len(num2)):
+    if(not len(num1) == len(num2)):
         return False
     for x in range(len(num1)):
-           if (num1[x] != num2[x]):
+           if (not num1[x] == num2[x]):
                 return False
     return True
             
@@ -120,7 +126,7 @@ def diffLTNoNegatives(num1, num2):
     
 
 def diffLT(number1, number2):
-    if (number2 == 0):
+    if (isEqual(number2, 0)):
         return number1
     diffTable = {
         -10: [-11, -12, -13, -14, -15, -16, -17, -18, -19, -20], 

@@ -12,7 +12,7 @@ def sumAlg(num1, num2, base):
     shorterNum = list(str(num2))
     res = ""
     reminder = 0
-    minusesFoundInLongerNumber = 0
+    # minusesFoundInLongerNumber = 0
 
     if (isSmaller(longerNum, shorterNum)):
         tmpSwap = longerNum
@@ -26,24 +26,24 @@ def sumAlg(num1, num2, base):
     shorterNumI = 1
     while (isSmaller(shorterNumI, shorterNumLen + 1)):
 
-        shiftDueToUpperMinus = 0
-        shiftDueToLowerMinus = 0
+        # shiftDueToUpperMinus = 0
+        # shiftDueToLowerMinus = 0
 
         # internal negative digits handling (doesn't work)
-        if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
-            longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
-            longerNumI += 1
-            minusesFoundInLongerNumber += 1
-            shiftDueToUpperMinus += 1
+        # if (isBiggerOrEqual(longerNumLen - 1 - longerNumI, 0) and isEqual(longerNum[longerNumLen - 1 - longerNumI], '-')):
+        #     longerNum[longerNumLen - longerNumI] = '-' + longerNum[longerNumLen - longerNumI]
+        #     longerNumI += 1
+        #     minusesFoundInLongerNumber += 1
+        #     shiftDueToUpperMinus += 1
         
-        if (isBiggerOrEqual(shorterNumLen - 1 - shorterNumI, 0) and isEqual(shorterNum[shorterNumLen - 1 - shorterNumI], '-')):
-            shorterNum[shorterNumLen - shorterNumI] = '-' + shorterNum[shorterNumLen - shorterNumI]
-            shorterNumI += 1
-            shiftDueToLowerMinus += 1
+        # if (isBiggerOrEqual(shorterNumLen - 1 - shorterNumI, 0) and isEqual(shorterNum[shorterNumLen - 1 - shorterNumI], '-')):
+        #     shorterNum[shorterNumLen - shorterNumI] = '-' + shorterNum[shorterNumLen - shorterNumI]
+        #     shorterNumI += 1
+        #     shiftDueToLowerMinus += 1
 
         tmpSum = sumLT(sumLT(
-                            int(longerNum[longerNumLen - longerNumI - shiftDueToUpperMinus]),
-                            int(shorterNum[shorterNumLen - shorterNumI - shiftDueToLowerMinus])),
+                            int(longerNum[longerNumLen - longerNumI]),
+                            int(shorterNum[shorterNumLen - shorterNumI])),
                     reminder)
                 
         # rounding to a base
@@ -57,7 +57,7 @@ def sumAlg(num1, num2, base):
         longerNumI += 1
         shorterNumI += 1
 
-    longerNumI = shorterNumLen + minusesFoundInLongerNumber + 1
+    longerNumI = shorterNumLen + 1
     while (isSmaller(longerNumI, longerNumLen + 1)):
 
         # internal negative digits handling (doesn't work)
@@ -83,4 +83,4 @@ def sumAlg(num1, num2, base):
 
     return int(res[::-1])
 
-# print(sumAlg(123, 12, 1   0))
+# print(sumAlgB10(40, 6))
