@@ -1,30 +1,31 @@
 from sum_alg import sumAlg, sumAlgB10
 from utils_alg import *
 
-def diffAlgB10(num1, num2):
+def diffAlgB10(num1, num2, prime):
     num1 = str(num1)
     num2 = str(num2)
 
     if (isEqual(num1[0], '-') or isEqual(num2[0], '-')):
+        raise Exception("Developer has a mistake somewhere, there cant be negative numbers over FF")
         return diffNeg(num1, num2)
-    return diffAlg(num1, num2, 10)
+    return diffAlg(num1, num2, 10, prime)
 
-def diffNeg(num1, num2):
-    num1IsNegative = isEqual(num1[0], '-')
-    num2IsNegative = isEqual(num2[0], '-')
+# def diffNeg(num1, num2):
+#     num1IsNegative = isEqual(num1[0], '-')
+#     num2IsNegative = isEqual(num2[0], '-')
 
-    if (not num1IsNegative and num2IsNegative):
-        return sumAlgB10(num1, num2[1:])
-    if (num1IsNegative and not num2IsNegative):
-        return int('-' + str(sumAlgB10(num1[1:], num2)))
+#     if (not num1IsNegative and num2IsNegative):
+#         return sumAlgB10(num1, num2[1:])
+#     if (num1IsNegative and not num2IsNegative):
+#         return int('-' + str(sumAlgB10(num1[1:], num2)))
 
-    #  both negative
-    if(isSmaller(num1, num2)):
-        return int(str('-' + str(diffAlgB10(num1[1:], num2[1:]))))
-    else:
-        return diffAlgB10(num2[1:], num1[1:])
+#     #  both negative
+#     if(isSmaller(num1, num2)):
+#         return int(str('-' + str(diffAlgB10(num1[1:], num2[1:]))))
+#     else:
+#         return diffAlgB10(num2[1:], num1[1:])
 
-def diffAlg(num1, num2, base):
+def diffAlg(num1, num2, base, prime):
     longerNum = str(num1)
     shorterNum = str(num2)
     res = ""
@@ -32,6 +33,7 @@ def diffAlg(num1, num2, base):
     lenderExists = True
 
     if (isEqual(longerNum[0], '-') or isEqual(shorterNum[0], '-')):
+        raise Exception("Developer has a mistake somewhere, there cant be negative numbers over FF")
         return diffNeg(longerNum, shorterNum)
 
     longerNum = list(longerNum)
@@ -85,11 +87,14 @@ def diffAlg(num1, num2, base):
         for x in range(shorterNumLen, longerNumLen):
             res += str(longerNum[longerNumLen - 1 - x])
 
-    # put '-' if the first number was smaller
     if (swapped):
-        return int('-' + res[::-1])
+        # if diffAlg is used for implementing basic arithmetic then let it work as it should
+        if (prime is None):
+            return int('-' + res[::-1])
+        # for computations over FF
+        return diffAlg(prime, res[::-1], 10, prime)
     else: return int(res[::-1])
 
 
 # TESTS
-# print(diffAlgB10("-40", "6"))
+# print(diffAlgB10(5, 7, 12))

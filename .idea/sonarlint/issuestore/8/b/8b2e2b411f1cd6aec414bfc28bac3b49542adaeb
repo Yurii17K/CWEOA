@@ -1,0 +1,26 @@
+
+ppython:S117"MRename this parameter "A" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8±àý‘Û0
+ppython:S117"MRename this parameter "B" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8äý˜’Û0
+ppython:S117"MRename this parameter "M" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8äý˜’Û0
+qpython:S117"SRename this local variable "Pm" to match the regular expression ^[_a-z][a-z0-9_]*$.(ñîúç8åý˜’Û0
+qpython:S117"NRename this parameter "Px" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8åý˜’Û0
+qpython:S117"NRename this parameter "Py" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8åý˜’Û0
+qpython:S117"NRename this parameter "Qx" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8åý˜’Û0
+qpython:S117"NRename this parameter "Qy" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯æ§×ÿÿÿÿÿ8æý˜’Û0
+ppython:S117"MRename this parameter "A" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÖÃŠªÿÿÿÿÿ8æý˜’Û0
+qpython:S117"NRename this parameter "C1" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÖÃŠªÿÿÿÿÿ8çý˜’Û0
+qpython:S117"NRename this parameter "C2" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÖÃŠªÿÿÿÿÿ8çý˜’Û0
+qpython:S117"SRename this local variable "Pm" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ì•—’8èý˜’Û0
+ppython:S117"MRename this parameter "A" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8éý˜’Û0
+ppython:S117"MRename this parameter "B" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8êý˜’Û0
+ppython:S117"MRename this parameter "M" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8ëý˜’Û0
+qpython:S117"NRename this parameter "Px" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8ëý˜’Û0
+qpython:S117"NRename this parameter "Py" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8ëý˜’Û0
+qpython:S117"NRename this parameter "Qx" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8ìý˜’Û0
+qpython:S117"NRename this parameter "Qy" to match the regular expression ^[_a-z][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8ìý˜’Û0
+upython:S117"WRename this local variable "decr_M" to match the regular expression ^[_a-z][a-z0-9_]*$.(Æí°‰8ìý˜’Û0
+rpython:S1542"NRename function "testCase" to match the regular expression ^[a-z_][a-z0-9_]*$.(îž¾Úûÿÿÿÿ8íý˜’Û0
+ppython:S117%"MRename this parameter "A" to match the regular expression ^[_a-z][a-z0-9_]*$.(•€šîûÿÿÿÿ8²àý‘Û0
+ppython:S117%"MRename this parameter "P" to match the regular expression ^[_a-z][a-z0-9_]*$.(•€šîûÿÿÿÿ8îý˜’Û0
+xpython:S117&"URename this local variable "pStr" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ãõßçûÿÿÿÿ8²àý‘Û0
+xpython:S1542%"TRename function "point_order_EC" to match the regular expression ^[a-z_][a-z0-9_]*$.(•€šîûÿÿÿÿ8³àý‘Û0

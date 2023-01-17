@@ -7,8 +7,35 @@ def divAlgB10(dividend, divisor):
     if isEqual(divisor, 0):
         raise ValueError("CAN NOT DIVIDE BY ZERO")
     if isEqual(str(dividend)[0], '-') or isEqual(str(divisor)[0], '-'):
-        return divWithNeg(str(dividend), str(divisor))
+        raise Exception("Developer has a mistake somewhere, there cant be negative numbers over FF")
+        # return divWithNeg(str(dividend), str(divisor))
     return divAlg(dividend, divisor, 10)
+
+# def divAlgImproved(dividend, divisor, base):
+#     if (isSmaller(dividend, divisor)):
+#         return (0, int(dividend))
+
+#     dividend = list(str(dividend))
+#     divisor = str(divisor)
+#     reminder = 0
+#     res = ""
+
+#     dividendLen = len(dividend)
+
+#     tmpSum = 0
+
+#     while True: # divisors can't be larger than 9, but just to be safe in this crazy world
+#         if (isSmaller(tmpSum, dividend)):
+#             tmpSum = sumAlg(tmpSum, divisor, base)
+#         else:
+#             if (isBigger(tmpSum, dividend)): 
+#                 multiplications = diffAlg(multiplications, 1, base=10)
+#                 tmpSum = diffAlg(tmpSum, divisor, base)
+#             res += str(multiplications)
+#             reminder = diffAlg(dividend, tmpSum, base)
+#             dividend[dividend] = str(reminder)
+#             break
+
 
 def divAlg(dividend, divisor, base):
     if (isSmaller(dividend, divisor)):
@@ -43,10 +70,10 @@ def divAlg(dividend, divisor, base):
                     tmpSum = sumAlg(tmpSum, divisor, base)
                 else:
                     if (isBigger(tmpSum, tmpDividend)): 
-                        multiplications = diffAlg(multiplications, 1, base=10)
-                        tmpSum = diffAlg(tmpSum, divisor, base)
+                        multiplications = diffAlg(multiplications, 1, base=10, prime=None)
+                        tmpSum = diffAlg(tmpSum, divisor, base, None)
                     res += str(multiplications)
-                    reminder = diffAlg(tmpDividend, tmpSum, base)
+                    reminder = diffAlg(tmpDividend, tmpSum, base, None)
                     dividend[dividendEndPointer] = str(reminder)
                     dividendStartPointer = dividendEndPointer
                     break
@@ -56,32 +83,33 @@ def divAlg(dividend, divisor, base):
    
     return (int(res), reminder)
     
-def divWithNeg(dividend, divisor):
-    negative = True
+# def divWithNeg(dividend, divisor):
+#     negative = True
 
-    dividentIsNegative = isEqual(dividend[0], '-')
-    divisorIsNegative =  isEqual(divisor[0], '-')
+#     dividentIsNegative = isEqual(dividend[0], '-')
+#     divisorIsNegative =  isEqual(divisor[0], '-')
 
-    if dividentIsNegative and not divisorIsNegative:
-        dividend = dividend[1:]
-    elif not dividentIsNegative and divisorIsNegative:
-        divisor = divisor[1:]
-    elif dividentIsNegative and divisorIsNegative:
-        dividend = dividend[1:]
-        divisor = divisor[1:]
-        negative = False
+#     if dividentIsNegative and not divisorIsNegative:
+#         dividend = dividend[1:]
+#     elif not dividentIsNegative and divisorIsNegative:
+#         divisor = divisor[1:]
+#     elif dividentIsNegative and divisorIsNegative:
+#         dividend = dividend[1:]
+#         divisor = divisor[1:]
+#         negative = False
 
-    multiplications = 0
-    tmpSum = 0
-    while(isSmaller(tmpSum, dividend)):
-        multiplications = sumAlgB10(multiplications, 1)
-        tmpSum = sumAlgB10(tmpSum, divisor)
+#     multiplications = 0
+#     tmpSum = 0
+#     while(isSmaller(tmpSum, dividend)):
+#         multiplications = sumAlgB10(multiplications, 1)
+#         tmpSum = sumAlgB10(tmpSum, divisor)
 
-    quotient = str(multiplications)
-    reminder = diffAlg(tmpSum, dividend, 10)
+#     quotient = str(multiplications)
+#     reminder = diffAlg(tmpSum, dividend, 10, None)
 
-    if negative:
-        return (int('-' + quotient), reminder)
-    else: return(int(quotient), reminder)
+#     if negative:
+#         return (int('-' + quotient), reminder)
+#     else: return(int(quotient), reminder)
 
-# print(divAlg(-14, 71, 10))
+# print(divAlg(12312312312312, 1231231231, 10))
+# print(divAlgB10(-34, 12))

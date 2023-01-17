@@ -25,7 +25,7 @@ def fast_addition(A:int, p:int, P, n:int):
 
     # recursive call to speed up the reminders instead of a loop of additions
     # (i dont want 31 calls for addition when lets say n is 63 and etc)
-    ODD = fast_addition(A, p, P, diffAlgB10(m, multiplicationsLeft))
+    ODD = fast_addition(A, p, P, diffAlgB10(m, multiplicationsLeft, p))
 
     # for x in range(diffAlgB10(m, tmpMult)):
     #     ODD = add_points(A, p, ODD, P)
@@ -33,12 +33,12 @@ def fast_addition(A:int, p:int, P, n:int):
     return add_points(A, p, DOUBLES, ODD)
 
 # TESTS
-# print(fast_addition(33, 47, 71, (37, 37), 0))
+# print(fast_addition(33, 71, (15, 44), 35))
 # print(fast_addition(33, 45, 71, (8, 53), 1))
 # print(fast_addition(6, 31, (6, 14), 4))
-# P = (25, 26)
-# for x in range(2, 10):
-#     print(fast_addition(33, 47, P, x),  x)
+P = (15, 44)
+for x in range(2, 100):
+    print(fast_addition(33, 71, P, x),  x)
 # for x in range(2, 50):
 #     P = add_points(33, 47, P, (25, 26))
 #     print(P, x)
