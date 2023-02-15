@@ -46,3 +46,4 @@ def random_element_of_order_k_div_4(A, B, p, k):
 # TESTS
 # for x in range(1, 30):
 # print(pub_pr_keys(5))
+# print(find_order(312345, (15467, 13551), 21269))

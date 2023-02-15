@@ -37,4 +37,4 @@ def is_quadratic_residue(a, p):
     return isEqual(legendre_symbol, 1)
 
 # TEST
-# print(find_random_point(4, 5, 7))
+# print(find_random_point(312345, 123214, 21269))

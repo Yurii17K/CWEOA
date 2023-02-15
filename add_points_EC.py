@@ -37,7 +37,7 @@ def add_points(A, p, P1, P2):
                     divAlgB10(multAlgB10(2, P1[1]), p)[1], # denominator modulo p
                     p) # dividing nominator by denominator
 
-        x = divAlgB10(diffAlgB10(mod_pow(alpha, 2, p), multAlgB10(2, P1[0]), p), p)[1]
+        x = divAlgB10(diffAlgB10(mod_pow(alpha, 2, p), divAlgB10(multAlgB10(2, P1[0]), p)[1], p), p)[1]
         y = divAlgB10(diffAlgB10(multAlgB10(alpha, diffAlgB10(P1[0], x, p)), P1[1], p), p)[1]
 
         return (x, y)
